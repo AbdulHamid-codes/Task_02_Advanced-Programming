@@ -8,14 +8,24 @@ public class Customer {
 	String CNIC;
 	
 	public
-	void setName(String n){
+	boolean setName(String n){
+		if(n.length() < 5) {
+			System.out.println("Name too short");
+			return false;
+		}
 		name = n;
+		return true;
 	}
 	String getName(){
 		return name;
 	}
-	void setAccountNo(int a){
+	boolean setAccountNo(int a){
+		if(a <= 0) {
+			System.out.println("Account No cannot be 0 or negative");
+			return false;
+		}
 		accountNumber = a;
+		return true;
 	}
 	int getAccountNo(){
 		return accountNumber;
@@ -26,14 +36,24 @@ public class Customer {
 	int getPhone(){
 		return phoneNumber;
 	}
-	void setAddress(String ad){
+	boolean setAddress(String ad){
+		if(ad.length() < 6) {
+			System.out.println("Address too short");
+			return false;
+		}
 		address=ad;
+		return true;
 	}
 	String getAddress(){
 		return address;
 	}
-	void setCNIC(String cn){
+	boolean setCNIC(String cn){
+		if(cn.length() != 13) {
+			System.out.println("CNIC length is not in 13 digit format");
+			return false;
+		}
 		CNIC = cn;
+		return true;
 	}
 	String getCNIC(){
 		return CNIC;
