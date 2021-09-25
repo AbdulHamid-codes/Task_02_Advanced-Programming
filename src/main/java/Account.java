@@ -21,8 +21,13 @@ public abstract class Account {
 	int getAccountNo(){
 		return accountNumber;
 	}
-	void makeDeposit(int amount){
+	boolean makeDeposit(int amount){
+		if(amount <= 0) {
+			System.out.println("Cannot deposit 0 or negative amount");
+			return false;
+		}
 		balance += amount;
+		return true;
 	}
 	abstract boolean makeWithdrawal(int amount );
 	
@@ -30,10 +35,11 @@ public abstract class Account {
 		System.out.println("Current Balance is: " + balance);
 		return balance;
 	}
-	void printStatement(){
+	boolean printStatement(){
 		System.out.println("---------Statement------------\n"
 				+ "Account No: " + accountNumber + "\n"
 				+ "Current Balance : " + balance + "\n");
+		return true;
 	}
 	boolean transferAmount(ArrayList<CheckingAccount> checking, ArrayList<SavingsAccount> saving ){
 		Scanner reader = new Scanner(System.in);
@@ -97,5 +103,5 @@ public abstract class Account {
 		return false;
 	}
 
-	abstract void displayAllDeductions();
+	abstract boolean displayAllDeductions();
 }

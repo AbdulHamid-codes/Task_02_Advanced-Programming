@@ -34,8 +34,9 @@ public class SavingsAccount extends Account {
 		return false;
 	}
 	@Override
-	void displayAllDeductions(){
+	boolean displayAllDeductions(){
 		System.out.println("Zakkat amount is: " + ((balance*2.5)/100));
+		return true;
 	}
 
 }

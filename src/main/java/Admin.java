@@ -187,7 +187,8 @@ public class Admin extends Account{
 		return true;
 	}
 	@Override
-	void displayAllDeductions(){
+	boolean displayAllDeductions(){
+		return true;
 	}
 	
 }

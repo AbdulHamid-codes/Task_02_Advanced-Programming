@@ -33,7 +33,8 @@ public class CheckingAccount extends Account {
 		}
 	}
 	@Override
-	void displayAllDeductions(){
+	boolean displayAllDeductions(){
 		System.out.println("Tax amount according 5% is: " + balance * 0.05);
+		return true;
 	}
 }
