@@ -19,7 +19,7 @@ public class Admin extends Account{
 	String getPassword(){
 		return password;
 	}
-	void openAccount(ArrayList<Customer> customer, ArrayList<CheckingAccount> checking, ArrayList<SavingsAccount> saving ){
+	boolean openAccount(ArrayList<Customer> customer, ArrayList<CheckingAccount> checking, ArrayList<SavingsAccount> saving ){
 		Scanner read = new Scanner(System.in);
 		System.out.println("Enter 1 to open Checking account\nEnter 2 to open Savings acccount");
 		int opt = read.nextInt();
@@ -54,10 +54,12 @@ public class Admin extends Account{
 				
 				customer.add(newCust);
 				System.out.println("Successfully created Account No: " + newCust.getAccountNo());
+				return true;
 				
 			}
 			else{
 				System.out.println("Sorry--- The customer already has a checking account");
+				return false;
 			}
 		}
 		else if(opt == 2){
@@ -88,17 +90,20 @@ public class Admin extends Account{
 				newCust.setAccountNo(temp.getAccountNo());
 				customer.add(newCust);
 				System.out.println("Successfully created Account No: " + newCust.getAccountNo());
+				return true;
 				
 			}
 			else{
 				System.out.println("Sorry--- The customer already has a savings account");
+				return false;
 			}
 		}
 		else{
 			System.out.println("Invalid option selected");
 		}
+		return false;
 	}
-	void closeAccount(ArrayList<Customer> customer, ArrayList<CheckingAccount> checking, ArrayList<SavingsAccount> saving){
+	boolean closeAccount(ArrayList<Customer> customer, ArrayList<CheckingAccount> checking, ArrayList<SavingsAccount> saving){
 		Scanner read = new Scanner(System.in);
 		System.out.println("Enter 1 to Close a checking account\nEnter 2 to Close a savings account");
 		int opt = read.nextInt();
@@ -119,6 +124,7 @@ public class Admin extends Account{
 					Customer temp = c;
 					if(temp.getAccountNo() == account){
 						customer.remove(temp);
+						return true;
 					}
 				}
 			}
@@ -137,6 +143,7 @@ public class Admin extends Account{
 					Customer temp = c;
 					if(temp.getAccountNo() == account){
 						customer.remove(temp);
+						return true;
 					}
 				}
 			}
@@ -144,29 +151,36 @@ public class Admin extends Account{
 		else{
 			System.out.println("Invalid Option");
 		}
+		return false;
 		
 	}
 	void loginAccount(){
 		
 	}
-	void setInterestRate(){
+	boolean setInterestRate(){
 		Scanner reader = new Scanner(System.in);
 		System.out.print("Enter the interest rate to set for savings account");
 		double interest = reader.nextInt();
-		
+		if(interest < 0) {
+			System.out.println("Interet rate cannot be negative");
+			return false;
+		}
 		SavingsAccount.setInterestRate(interest);
+		return true;
 	}
-	void displayAccountDetails(){
+	boolean displayAccountDetails(){
 		System.out.println("Back: ABC bank\n"
 				+ "Total Checking Accounts: " + CheckingAccount.getTotal()
 				+ "\nTotal Saving Accounts: " + SavingsAccount.getTotal());
+		return true;
 		}
-	void displayAccountDeductions(){
+	boolean displayAccountDeductions(){
 		System.out.println("Back: ABC bank\n"
 				+ "Total Checking Accounts: " + CheckingAccount.getTotal()
 				+ "\nTotal Saving Accounts: " + SavingsAccount.getTotal());
 		System.out.println("Tax deductions for Checking Accounts is dependent on total balance (5% above Rs.600000)\n"
 				+ "Zakkat deduction for Savings Accounts is 2.5% if balance exceeds Rs.20000");
+		return true;
 	}
 	@Override
 	boolean makeWithdrawal(int amount) {
